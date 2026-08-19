@@ -30,11 +30,17 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit from dodge device
 $(call inherit-product, device/oneplus/fairlady/device.mk)
 
+# Release name
+PRODUCT_RELEASE_NAME := OnePlus 15T
+
 PRODUCT_DEVICE := fairlady
 PRODUCT_NAME := twrp_fairlady
 PRODUCT_BRAND := oneplus
 PRODUCT_MODEL := OnePlus 15T
 PRODUCT_MANUFACTURER := oneplus
+
+# Assert
+TARGET_OTA_ASSERT_DEVICE := PLZ110,OP64DDL1
 
 PRODUCT_GMS_CLIENTID_BASE := android-oplus
 
