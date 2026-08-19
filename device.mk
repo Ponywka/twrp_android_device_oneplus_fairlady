@@ -30,7 +30,4 @@ PRODUCT_EXTRA_RECOVERY_KEYS += \
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += $(LOCAL_PATH)
-
-# some OrangeFox-specific settings
-$(call inherit-product, $(LOCAL_PATH)/fox_fairlady.mk)
 #
