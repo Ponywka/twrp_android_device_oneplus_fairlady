@@ -1,0 +1,21 @@
+# Fixes: Virtual A/B slot writes lost if flashed before first boot.
+# Known issue: can collide with a later OTA install (DM_DEV_CREATE busy).
+diff --git a/partitionmanager.cpp b/partitionmanager.cpp
+index fc19d6d..f0fe497 100755
+--- a/partitionmanager.cpp
++++ b/partitionmanager.cpp
+@@ -3733,6 +3733,14 @@ std::string TWPartitionManager::Get_Super_Partition() {
+ 
+ void TWPartitionManager::Setup_Super_Devices() {
+ 	std::string superPart = Get_Super_Partition();
++
++	if (android::base::GetBoolProperty("ro.virtual_ab.enabled", false)) {
++		auto sm = android::snapshot::SnapshotManager::NewForFirstStageMount();
++		if (sm && sm->RecoveryCreateSnapshotDevices() == android::snapshot::CreateResult::CREATED) {
++			return;
++		}
++	}
++
+ 	android::fs_mgr::CreateLogicalPartitions(superPart);
+ }
+ 

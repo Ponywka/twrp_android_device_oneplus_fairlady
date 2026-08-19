@@ -3,7 +3,7 @@
 ## Working
 
 - [x] Display
-- [x] Touch 
+- [x] Touch
 - [x] Decryption
 - [x] Flashing
 - [x] Backup & Restore
@@ -35,6 +35,12 @@ git clone --depth=1 https://android.googlesource.com/kernel/prebuilts/6.6/arm64 
 ```
 mkdir -p device/oneplus/
 git clone https://github.com/Ponywka/twrp_android_device_oneplus_fairlady.git device/oneplus/fairlady
+```
+### Apply optional patches
+```
+cd ~/TWRP/bootable/recovery
+git apply ../../device/oneplus/fairlady/patches/bootable_recovery/0001-virtual-ab-snapshot-aware-super-mount.patch
+cd -
 ```
 ### BUILD!
 ```
