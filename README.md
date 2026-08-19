@@ -1,4 +1,4 @@
-# OnePlus 15T fairlady OrangeFox device tree
+# OnePlus 15T fairlady TWRP device tree
 
 ## Working
 
@@ -21,25 +21,27 @@
 
 # How To Build
 
-### Clone & Sync Source
+### Init & Sync TWRP Source
 ```
-mkdir -p ~/android/OrangeFox_14
-cd ~/android/OrangeFox_14
-git clone https://gitlab.com/OrangeFox/sync.git
-cd sync
-./orangefox_sync.sh --branch 14.1 --path ~/android/fox_14.1
+mkdir -p ~/TWRP && cd ~/TWRP
+repo init -u https://github.com/TWRP-Test/platform_manifest_twrp_aosp.git -b twrp-16.0 -m twrp-default.xml --git-lfs --depth 1
+repo sync
+```
+### Get the GKI prebuilt kernel
+```
+git clone --depth=1 https://android.googlesource.com/kernel/prebuilts/6.6/arm64 kernel/prebuilts/6.6/arm64
 ```
 ### Clone Device-tree
 ```
-cd ~/android/fox_14.1/device
-mkdir -p oneplus
-cd oneplus
-git clone https://github.com/koaaN/android_device_fairlady-orangefox fairlady
+mkdir -p device/oneplus/
+git clone https://github.com/Ponywka/twrp_android_device_oneplus_fairlady.git device/oneplus/fairlady
 ```
 ### BUILD!
 ```
-cd ~/android/fox_14.1
+cd ~/TWRP
 source build/envsetup.sh
-lunch twrp_fairlady-ap2a-eng
-mka adbd recoveryimage
+lunch twrp_fairlady-bp2a-eng
+mka recoveryimage
 ```
+
+If there is no error, `recovery.img` will be found in `out/target/product/fairlady/recovery.img`
